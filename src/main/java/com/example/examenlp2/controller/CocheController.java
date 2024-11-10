@@ -33,9 +33,9 @@ public class CocheController {
 
     }
     @PostMapping
-    public ResponseEntity<Coche> crear(@Valid @RequestBody Coche Coche) {
+    public ResponseEntity<Coche> crear(@Valid @RequestBody Coche coche) {
         try {
-            Coche c = cocheService.create(Coche);
+            Coche c = cocheService.create(coche);
             return new ResponseEntity<>(c, HttpStatus.CREATED);
         } catch (Exception e) {
             // TODO: handle exception
