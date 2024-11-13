@@ -6,6 +6,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class CocheController {
     @Autowired
     private CocheService cocheService;
 
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping
     public ResponseEntity<List<Coche>> readAll(){
         try {
@@ -32,6 +34,7 @@ public class CocheController {
         }
 
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Coche> crear(@Valid @RequestBody Coche coche) {
         try {
@@ -43,6 +46,7 @@ public class CocheController {
         }
 
     }
+    @PreAuthorize("hasRole('ADMIN') or hasRole('USER')")
     @GetMapping("/{id}")
     public ResponseEntity<Coche> getCocheId(@PathVariable("id") Long id){
         try {
@@ -54,6 +58,7 @@ public class CocheController {
         }
 
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Coche> delCoche(@PathVariable("id") Long id){
         try {
@@ -65,6 +70,7 @@ public class CocheController {
         }
 
     }
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
     public ResponseEntity<?> updateCoche(@PathVariable("id") Long id, @Valid @RequestBody Coche Coche){
 
